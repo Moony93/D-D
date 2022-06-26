@@ -1,0 +1,145 @@
+package com;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Monk 
+{
+	private byte baseHp = 8;
+	private byte hp;
+	private byte armorClass;
+	
+	Scanner input = new Scanner(System.in);
+	
+	public static int RollD20()
+	{
+		int roll = (int)Math.floor(Math.random()*(20-1+1)+1);
+		return roll;
+	}
+	
+	public static int RollD6()
+	{
+		int roll = (int)Math.floor(Math.random()*(6-1+1)+1);
+		return roll;
+	}
+	
+	public static int RollD4()
+	{
+		int roll = (int)Math.floor(Math.random()*(4-1+1)+1);
+		return roll;
+	}
+	
+	public static void Stats()//metodo per calcolare le 6 caratteristiche rollando i 4d6 e rirollando il dado dal valore più basso
+	{
+		int[] Caratt = new int[6];
+
+		for(int i=0; i < 6; i++)
+		{
+			int[] tmp = new int[4];
+			for(int j=0; j < 4; j++)//generatore di un'array di 4d6
+				tmp[j] = RollD6();
+			
+			//stampa dei 4d6
+			int somma;
+			System.out.print("I 4d6 lanciati hanno dato: ");
+			for(int j=0; j < 4; j++)
+			{
+				if(j==tmp.length-1)
+				{
+					System.out.print(" " + tmp[j] + ".");
+					break;
+				}
+				System.out.print(" " + tmp[j] + ", ");
+			}	
+				System.out.println(" ");
+			
+			while(true)//domanda se vuole rilanciare l'ultimo dado
+			{
+				System.out.println("Vuoi rilanciare il dado dal valore più basso? (S/N) ");
+				Scanner input = new Scanner(System.in);
+				char risp = input.next().charAt(0);
+				if (Character.toLowerCase(risp) == 's')
+				{
+					//se risponde si, dobbiamo verificare chi è il numero più piccolo rollato
+					//nell'array tmp[] e sostituirlo con un ruovo RollD6 invocando il metodo apposito
+					int minore = tmp[0];
+					for(int j = 1; j<4; j++)//determiniamo il valore più basso nell'array dei 4d6 rollati prima
+					{
+						if(tmp[j]<minore)
+							minore = tmp[j];
+					}
+					System.out.println("Il dado che ha rollato il valore minore era: " + minore);
+					int nuovoMin = RollD6();
+					System.out.println("Il dado rilanciato ha dato: " + nuovoMin);
+
+					for(int j = 0; j<4; j++)//determiniamo il valore più basso nell'array e sostituiamo quel valore con il roll del d6
+					{
+						if(tmp[j]== minore)
+						{
+							tmp[j] = nuovoMin;
+							break;
+						}
+					}
+					System.out.print("Dopo il reroll, i 4d6 lanciati ora risultano: ");
+					for(int j=0; j < 4; j++)
+					{
+						if(j==tmp.length-1)
+						{
+							System.out.print(" " + tmp[j] + ".");
+							break;
+						}
+						System.out.print(" " + tmp[j] + ", ");
+					}	
+					System.out.println(" ");
+						
+					minore = tmp[0];//resettiamo la variabile minore per il check, che altrimenti avrebbe ancora il valore rilevato precedentemente
+					for(int j = 1; j<4; j++)//ricontrolliamo il valore più piccolo dopo il roll del nuovo d6
+					{
+						if(tmp[j]<minore)
+							minore = tmp[j];
+					}
+					
+					somma = tmp[0];
+					for(int j = 1; j<4; j++)//sommiamo tra loro tutti i valori dell'array dei 4d6 rollati tranne il più piccolo, trovato in precedenza.
+						somma = somma + tmp[j];
+					somma = somma - minore;
+					break;
+				}
+				else if (Character.toLowerCase(risp) == 'n')
+				{
+					//se risponde no, l'array tmp[] rimane invariato e viene generata la statistica che verrà aggiunta nell'array Caratt[6]
+					int minore = tmp[0];
+					for(int j = 1; j<4; j++)//determiniamo il valore più basso nell'array dei 4d6 rollati prima per eliminarlo dalla somma
+					{
+						if(tmp[j]<minore)
+							minore = tmp[j];
+					}
+					somma = tmp[0];
+					for(int j = 1; j<4; j++)//sommiamo tra loro tutti i valori dell'array dei 4d6 rollati tranne il più piccolo, trovato in precedenza.
+						somma = somma + tmp[j];
+					somma = somma - minore;
+					break;
+				}		
+			}
+			System.out.println("La somma tra i 3 numeri più alti nel lancio dei 4d6 è: " + somma);
+			System.out.println(" ");
+
+			Caratt[i] = somma; 
+		}
+		System.out.println("I tuoi valori di caratteristica sono: ");
+		for(int i = 0; i< 6; i++)
+		{
+			if(i == Caratt.length -1)
+			{
+				System.out.print(" " + Caratt[i] + ". ");
+				break;
+			}
+			System.out.print(" " + Caratt[i] + ", ");
+		}
+
+	}
+	public static void main(String[] args) 
+	{
+		Stats();
+		
+	}
+}
