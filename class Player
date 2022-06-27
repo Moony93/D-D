@@ -2,13 +2,28 @@ package com;
 import java.util.Scanner;
 import java.util.Random;
 
-public class Monk 
+public class Player 
 {
-	private byte baseHp = 8;
-	private byte hp;
-	private byte armorClass;
-	
-	Scanner input = new Scanner(System.in);
+	private String race;	//razza
+	private String clas;	//classe
+	private int baseHp;		//punti vita base
+	private int hp;		//punti vita totali
+	private int armorClass;	//classe armature
+	private static int str; 	//forza
+	private int dex;	//destrezza
+	private int cons;	//costituzione
+	private int intl;	//intelligenza	
+	private int wis;	//saggezza
+	private int cha;	//carisma
+	private int spd; 	//velocità in metri
+	private int modstr;	//modificatore forza
+	private int moddex;	//modificatore destrezza
+	private int modcons;	//modificatore costituzione
+	private int modintl;	//modificatore intelligenza		
+	private int modwis;		//modificatore saggezza
+	private int modcha;		//modificatore carisma
+
+	static Scanner input = new Scanner(System.in);
 	
 	public static int RollD20()
 	{
@@ -28,10 +43,68 @@ public class Monk
 		return roll;
 	}
 	
-	public static int[] Stats()    //metodo per calcolare le 6 caratteristiche rollando i 4d6 e rirollando il dado dal valore più basso
+	public void sceltaRazza() 
+	{	//switch per scegliere la razza
+		System.out.println("Con che razza intendi giocare?");
+		System.out.println("1 - Umano");
+		System.out.println("2 - Dragonide");
+		System.out.println("3 - Nano");
+
+		int x = input.nextInt();
+		switch(x)
+		{
+			case(1):
+			{
+				System.out.println("Hai scelto Umano");
+				System.out.print("Come caratteristica di razza avrai: ");
+				System.out.print("Tutte le caratteristiche aumentate di 1");
+
+				str = str +1;
+				dex = dex +1;
+				intl = intl +1;
+				cons = cons +1;
+				wis = wis +1;
+				break;
+			}
+			case(2):
+			{
+				System.out.println("Hai scelto Dragonide");
+				System.out.print("Come caratteristica di razza avrai: ");
+				System.out.print("Tutte le caratteristiche aumentate di 1");
+
+				str = str +1;
+				dex = dex +1;
+				intl = intl +1;
+				cons = cons +1;
+				wis = wis +1;
+				spd = 9;
+				break;
+			}
+		}
+			
+	}
+	
+	public void sceltaClasse()
+	{	//switch per scegliere la classe
+		System.out.println("Con che classe intendi giocare?");
+		int x = input.nextInt();
+		switch(x)
+		{
+			case(1):
+			{
+				
+			}
+			case(2):
+			{
+				
+			}
+		}
+	}
+	
+	public static int[] rollStats()//metodo per calcolare le 6 caratteristiche rollando i 4d6 e rirollando il dado dal valore più basso
 	{
 		int[] Caratt = new int[6];
-		int somma;
+
 		for(int i=0; i < 6; i++)
 		{
 			int[] tmp = new int[4];
@@ -39,6 +112,7 @@ public class Monk
 				tmp[j] = RollD6();
 			
 			//stampa dei 4d6
+			int somma;
 			System.out.print("I 4d6 lanciati hanno dato: ");
 			for(int j=0; j < 4; j++)
 			{
@@ -123,7 +197,6 @@ public class Monk
 			System.out.println(" ");
 
 			Caratt[i] = somma; 
-			return Caratt;
 		}
 		System.out.println("I tuoi valori di caratteristica sono: ");
 		for(int i = 0; i< 6; i++)
@@ -135,12 +208,24 @@ public class Monk
 			}
 			System.out.print(" " + Caratt[i] + ", ");
 		}
-
+		return Caratt;
 	}
-	public static void main(String[] args) 
+	public int[] setStats(int[] Caratt) //metodo per impostare le statistiche in caso di roll manuale
 	{
-		//prova
-		Stats();
+		for (int i = 0; i < Caratt.length; i++) 
+		{
+			Caratt[i] = input.nextInt();
+		}
+		return Caratt;
+	}
+	public void assStats(int[] Caratt) //metodo di assegnazione dei valori rollati alle varie caratteristiche
+	{
+		
+	}
+	
+	public static void main(String[] args) 
+	{	//prova
+		rollStats();
 		
 	}
 }
