@@ -1,0 +1,19 @@
+public interface Dices {
+	
+	static int RollD12()
+	{
+		int roll = (int) Math.floor(Math.random()*(12-1+1)+1);
+		return roll;
+	}
+	
+	static int RollD6()
+	{
+		int roll = (int) Math.floor(Math.random()*(6-1+1)+1);
+		return roll;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(RollD12());
+	}
+}
