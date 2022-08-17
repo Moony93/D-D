@@ -19,7 +19,7 @@ public class Player implements Dices
 	private int wisdom;
 	private int charisma;
 	
-	//stats modifiers
+	
 	private int modStr; 
 	private int modDex; 
 	private int modCon;
@@ -174,18 +174,64 @@ public class Player implements Dices
 		this.modCha = modCha;
 	}
 
+	
+	//first method, to give the character a name
+	void creation()
+	{
+		System.out.println("Welcome to the creation of your Dungeons and Dragons' (5e) character!");
+		System.out.println("Write the name you wish for your character!");
+		
+		try (Scanner input = new Scanner(System.in)) {
+			this.setName(input.nextLine());
+		}
+		System.out.println("Your name is: " + this.getName());
+	}
+	
+	//Method for rolling stats
+	void statsRollChoice()
+	{
+		System.out.println("Do you want me to roll dices for your character's stats or are you rolling them with your dices?");
+		System.out.println("1 - Let's roll them together");
+		System.out.println("2 - I'll roll them myself");
+		
+		boolean selection = true;
+		
+		while(selection)
+		{
+			Scanner input = new Scanner(System.in);
+			switch(input.nextInt())
+			{
+				case 1:
+					
+			}
+		}
+	}
+	//rolls the stats
+	void rollStats()
+	{
+		
+	}
+	
+	//lets the user input the rolled stats if he rolled them with his own dices
+	void inputStats()
+	{
+		
+	}
+	
 	//race selection for the character
 	void raceSelect() 
 	{
 		System.out.println("Select your race");
 		
 		System.out.println("1 - Human");
-		System.out.println("2 - Human");
-		System.out.println("3 - Human");
-		System.out.println("4 - Human");
-		System.out.println("5 - Human");
-		System.out.println("6 - Human");
-		System.out.println("7 - Human");
+		System.out.println("2 - Elf");
+		System.out.println("3 - Halfling");
+		System.out.println("4 - Dwarf");
+		System.out.println("5 - Dragonborn");
+		System.out.println("6 - Gnome");
+		System.out.println("7 - Half-Elf");
+		System.out.println("8 - Half-Orc");
+		System.out.println("9 - Tiefling");
 
 		boolean selection = true;
 		
@@ -199,4 +245,5 @@ public class Player implements Dices
 			}
 		}
 	}
+	
 }
