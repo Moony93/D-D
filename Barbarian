@@ -27,30 +27,23 @@ abstract class Barbarian extends Player
 					int newlife;
 					
 					System.out.println("Roll della vita: " + roll);
-					newlife = this.getHitPoints() + roll;
+					newlife = this.getMaxHP() + roll;
 					System.out.println("Nuova vita = " + newlife);
-					this.setHitPoints(newlife);
+					this.setMaxHP(newlife);
 					selection = false;
 					break;
 					
 				case 2:
-					newlife = this.getHitPoints() + 5;
+					newlife = this.getMaxHP() + 5;
 					System.out.println("Nuova vita = " + newlife);
-					this.setHitPoints(newlife);
+					this.setMaxHP(newlife);
 					selection = false;
 					break;
-
-					
 			}
+			
+			this.setLevel(this.getLevel() + 1);
+			System.out.println("Nuovo livello: " + this.getLevel());
 		}
-
-		//rolla la nuova vita al level up, 1d12 + modificatore di costituzione per il barbaro
-		int roll = Dices.RollD12();
-		
-		System.out.println("Roll della vita: " + roll);
-		int newlife = this.getHitPoints() + roll;
-		System.out.println("Nuova vita = " + newlife);
-
-		this.setHitPoints(newlife);
 	}
 }
+
