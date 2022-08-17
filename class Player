@@ -202,7 +202,14 @@ public class Player implements Dices
 			switch(input.nextInt())
 			{
 				case 1:
+					selection = false;
+					this.rollStats();
+					break;
 					
+				case 2:
+					selection = false;
+					this.inputStats();
+					break;
 			}
 		}
 	}
