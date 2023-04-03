@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 abstract class Barbarian extends Player
 {
-	
+	//metodo che imposta la classe e gli HP base nel caso in cui si scelga questa classe, viene lanciato subito alla creazione
 	void firstLevel()
 	{
 		this.setClas("Barbarian");
